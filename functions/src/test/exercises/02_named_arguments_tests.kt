@@ -5,33 +5,26 @@ class NamedArgumentsTests {
 
     @Test
     fun `basic`() {
-        assertEquals(sayHello("World",
-            false,
-            false,
-            false), "Hello, World")
+        assertEquals(sayHelloToYou("World"), "Hello, World")
     }
 
     @Test
     fun `exclamation`() {
-        assertEquals(sayHello("World",
-            true,
-            false,
-            false), "Hello, World!")
+        assertEquals(sayHelloToYou("World", addExclamation = true), "Hello, World!")
     }
 
     @Test
     fun `question`() {
-        assertEquals(sayHello("World",
-            false,
-            true,
-            false), "Hello, World?")
+        assertEquals(sayHelloToYou("World", addQuestionMark = true), "Hello, World?")
     }
 
     @Test
     fun `capitalise`() {
-        assertEquals(sayHello("World",
-            false,
-            false,
-            true), "Hello, WORLD")
+        assertEquals(sayHelloToYou("World", capitalise = true), "Hello, WORLD")
+    }
+
+    @Test
+    fun `question and exclamation`() {
+        assertEquals(sayHelloToYou("World", addQuestionMark = true, addExclamation = true), "Hello, World!?")
     }
 }

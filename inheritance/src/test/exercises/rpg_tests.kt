@@ -1,13 +1,13 @@
-
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
+import java.util.*
 
 class RpgTest {
 
     @Test
     fun `can use health potions`() {
-        val potion = Potion("Brew of Fevers", health = 20)
+        val potion = HealthPotion("Brew of Fevers", health = 20)
 
         val updatedStats = potion.useItem(CharacterStats(currentHealth = 1, currentMana = 1))
 
@@ -16,7 +16,7 @@ class RpgTest {
 
     @Test
     fun `can use mana potion potions`() {
-        val potion = Potion("Vial of Hidden Talents", mana = 10)
+        val potion = ManaPotion("Vial of Hidden Talents", mana = 10)
 
         val updatedStats = potion.useItem(CharacterStats(currentHealth = 1, currentMana = 1))
 
@@ -25,15 +25,13 @@ class RpgTest {
 
     @Test
     fun `can apply random potion`() {
-        val potions = listOf(
-            Potion("Brew of Fevers", health = 20),
-            Potion("Vial of Hidden Talents", mana = 10),
-            Potion("Draught of Vitality", health = 50),
-            Potion("Potion of Healing", health = 10),
-            Potion("Tonic of Focus", health = 20)
-        )
 
-        val useItem = useRandomItem(potions, CharacterStats())
+        val inventory = Inventory(HealthPotion("Brew of Fevers", health = 20),
+                ManaPotion("Vial of Hidden Talents", mana = 10),
+                HealthPotion("Draught of Vitality", health = 50),
+                HealthPotion("Potion of Healing", health = 10),
+                HealthPotion("Tonic of Focus", health = 20))
+        val useItem = inventory.useRandomItem(CharacterStats(), Random(1))
 
         assertThat(useItem, equalTo(CharacterStats(currentHealth = 120, currentMana = 100)))
     }

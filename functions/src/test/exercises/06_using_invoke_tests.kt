@@ -8,8 +8,8 @@ class UsingInvokeTests {
         assertEquals(hello("John Doe"), "Hello, John Doe!")
     }
 
-//    @Test
-//    fun `converts to camel case using invoke`(){
-//        assertEquals(::hello.invoke("John Doe"), "Hello, John Doe!")
-//    }
+    @Test
+    fun `converts to camel case using invoke`(){
+        assertEquals(::hello.invoke("John Doe"), "Hello, John Doe!")
+    }
 }

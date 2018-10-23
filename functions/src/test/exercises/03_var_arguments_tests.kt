@@ -11,14 +11,20 @@ class VarArgumentsTests {
     }
 
     @Test
+    fun `print list of numbers`() {
+        val numbers = listOf(1, 2, 3)
+        assertEquals("1 -> 2 -> 3", printListOfNumbers(numbers))
+    }
+
+    @Test
     fun `use spread operator from list`() {
-//        val numbers = listOf(1, 2, 3)
-//        assertEquals(???, "1 -> 2 -> 3")
+        val numbers = listOf(1, 2, 3)
+        assertEquals(printListOfNumbers(numbers), "1 -> 2 -> 3")
     }
 
     @Test
     fun `use spread operator from array`() {
-//        val numbers = arrayOf(1, 2, 3)
-//        assertEquals(???, "1 -> 2 -> 3")
+        val numbers = arrayOf(1, 2, 3)
+        assertEquals(printNumbers(*numbers), "1 -> 2 -> 3")
     }
 }

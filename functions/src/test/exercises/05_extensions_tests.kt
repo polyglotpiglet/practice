@@ -5,7 +5,7 @@ class ExtensionTests {
 
     @Test
     fun `converts to camel case`() {
-        assertEquals(toCamelCase("my first extension"), "MyFirstExtension")
+        assertEquals(("my first extension").toCamelCase(), "MyFirsNtExtension")
     }
 
 }
