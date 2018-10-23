@@ -11,29 +11,49 @@ import java.util.Arrays
  */
 internal class TakeHomeCalculator(private val percent: Int) {
 
+//    fun netAmount(first: Money, vararg rest: Money): Money {
+//
+//        val total = rest.fold(first) { acc, next -> acc + next }
+//        val totalWithDeduction = total - Percentage(percent)
+//        return totalWithDeduction
+//
+//    }
+//
+//    internal data class Money(val amount: Int, val currency: String) {
+//        operator fun plus(that: Money): Money = if (currency == that.currency) {
+//            copy(amount = amount + that.amount)
+//        } else throw Incalculable()
+//
+//        operator fun minus(that: Money): Money = if (currency == that.currency) {
+//            copy(amount = amount - that.amount)
+//        } else throw Incalculable()
+//
+//        operator fun minus(percentage: Percentage): Money = copy(amount = amount - (amount * percentage.value / 100.0).toInt())
+//    }
+//
+//    internal data class Percentage(val value: Int)
+
+
     fun netAmount(first: Money, vararg rest: Money): Money {
 
-        var total = first
+        val total = rest.fold(first) { acc, next -> acc + next }
+        val tax = total * percent
+        return total - tax
 
-        for (next in rest) {
-            if (next.currency != total.currency) {
-                throw Incalculable()
-            }
-        }
-
-        for (next in rest) {
-            total = Money(total.amount + next.amount, next.currency)
-        }
-
-        val amount = total.amount * (percent / 100.0)
-        val tax = Money(amount.toInt(), first.currency)
-
-        return if (total.currency == tax.currency) {
-            Money(total.amount - tax.amount, first.currency)
-        } else {
-            throw Incalculable()
-        }
     }
 
-    internal class Money(val amount: Int, val currency: String)
+    internal data class Money(val amount: Int, val currency: String) {
+        operator fun plus(that: Money): Money = if (currency == that.currency) {
+            copy(amount = amount + that.amount)
+        } else throw Incalculable()
+
+        operator fun minus(that: Money): Money = if (currency == that.currency) {
+            copy(amount = amount - that.amount)
+        } else throw Incalculable()
+
+        // why make percentage a data class??? p55 q6
+        operator fun times(percentage: Int): Money = copy(amount = (amount * percentage / 100.0).toInt())
+    }
 }
+
+
