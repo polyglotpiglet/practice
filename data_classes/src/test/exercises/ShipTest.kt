@@ -33,8 +33,8 @@ class ShipTest {
         val destroyed = initial.destroy()
 
         assertThat(initial, not(equalTo(destroyed)))
-        assertThat(initial.isDestroyed, equalTo(false))
-        assertThat(destroyed.isDestroyed, equalTo(true))
+        assertThat(initial.destroyed, equalTo(false))
+        assertThat(destroyed.destroyed, equalTo(true))
     }
 
     @Test
@@ -44,8 +44,8 @@ class ShipTest {
 
     @Test
     fun `destructured ship coordinate`() {
-//        val (row, column) = Ship(HORIZONTAL, 1, 5, 7, false).coordinates
-//        assertThat(row, equalTo(5))
-//        assertThat(column, equalTo(7))
+        val (row, column) = Ship(HORIZONTAL, 1, 5, 7, false).coordinates
+        assertThat(row, equalTo(5))
+        assertThat(column, equalTo(7))
     }
 }
