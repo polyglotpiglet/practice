@@ -21,7 +21,7 @@ class FibonacciRange(override val start: Fibonacci, override val endInclusive: F
 fun main(args: Array<String>) {
     val start = Fibonacci(0, 1)
     val end = Fibonacci(100, 101)
-    (start..end).forEach(::println)
+    (start..end).take(5).map { it.value }.forEach(::println)
 }
 
 
